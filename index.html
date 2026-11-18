@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="icon" href="assets/logo-paw-certified.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261117-16">
+    <link rel="stylesheet" href="styles.css?v=20261117-17">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -183,6 +183,10 @@
                 <span class="target-mark target-wordmark" aria-hidden="true">Cl</span>
                 <div><strong>Clang assembly</strong><small><i></i> In progress</small></div>
               </div>
+              <div class="target-card target-progress">
+                <span class="target-mark target-wordmark" aria-hidden="true">GC</span>
+                <div><strong>GCC assembly</strong><small><i></i> In progress</small></div>
+              </div>
             </div>
           </div>
           <div class="pipeline-wrap reveal">
@@ -242,7 +246,7 @@
             <p>The first result is unconditional for every accepted reconstruction. The second rules out undefined C executions and strengthens the result to equality of observable behaviors.</p>
             <details>
               <summary>What is inside the trusted boundary?</summary>
-              <p>The theorem begins at typed, unexpanded CompCert Asm. Parsing assembly text, reversing concrete instruction expansion, and constructing that typed representation precede the theorem. Experimental Clang normalization is likewise outside the current mechanized guarantee.</p>
+              <p>The theorem begins at typed, unexpanded CompCert Asm. Parsing assembly text, reversing concrete instruction expansion, and constructing that typed representation precede the theorem. Experimental Clang and GCC normalization are likewise outside the current mechanized guarantee.</p>
             </details>
           </div>
         </div>
@@ -326,7 +330,7 @@
           </div>
 
           <div class="team-grid">
-            <a class="person-card person-lead reveal" href="https://swarnpriya.github.io/" target="_blank" rel="noreferrer">
+            <a class="person-card reveal" href="https://swarnpriya.github.io/" target="_blank" rel="noreferrer">
               <span class="person-role">Project Lead &amp; Maintainer</span>
               <span class="person-monogram" aria-hidden="true">SP</span>
               <span class="person-name">Swarn Priya</span>
@@ -379,7 +383,7 @@
     <footer>
       <div class="footer-brand"><img src="assets/logo-paw-certified.svg?v=3" alt="" width="36" height="36"><strong>DeComp<span class="brand-cert">Cert</span></strong></div>
       <p class="footer-statement"><strong>A formally verified decompilation framework for reconstructing C programs from assembly.</strong></p>
-      <p class="footer-status">Research Preview · CompCert-generated AArch64 Supported · Clang, x86, and RISC-V In Progress · Source Release Planned</p>
+      <p class="footer-status">Research Preview · CompCert-generated AArch64 Supported · Clang, GCC, x86, and RISC-V In Progress · Source Release Planned</p>
     </footer>
 
     <script type="module" src="app.js?v=20261117-6"></script>
