@@ -58,13 +58,13 @@ const sampleStages = [
   },
   {
     id: "clight", name: "Clight", assurance: "translation-validation",
-    evidence: "proved Cshmgen validator",
-    content: `int add(int, int);\nint main(void);\n\nint add(int x, int y)\n{\n  register int $z;\n  $z = $x + $y;\n  return $z;\n}\n\nint main(void)\n{\n  register int $z;\n  register int $60;\n  $60 = &add(3, 4);\n  $z = $60;\n  return $z;\n  return 0;\n}`,
+    evidence: "proved Cshmgen validator · redundant prototypes omitted",
+    content: `int add(int x, int y)\n{\n  register int $z;\n  $z = $x + $y;\n  return $z;\n}\n\nint main(void)\n{\n  register int $z;\n  register int $60;\n  $60 = &add(3, 4);\n  $z = $60;\n  return $z;\n  return 0;\n}`,
   },
   {
     id: "readable-c", name: "Readable C", assurance: "translation-validation",
-    evidence: "proved SimplExpr validator · runtime declarations omitted",
-    content: `extern int add(int, int);\nextern int main(void);\n\nint add(int x, int y)\n{\n  int z;\n  z = x + y;\n  return z;\n}\n\nint main(void)\n{\n  int z;\n  z = add(3, 4);\n  return z;\n  return 0;\n}`,
+    evidence: "proved SimplExpr validator · redundant prototypes omitted",
+    content: `int add(int x, int y)\n{\n  int z;\n  z = x + y;\n  return z;\n}\n\nint main(void)\n{\n  int z;\n  z = add(3, 4);\n  return z;\n  return 0;\n}`,
   },
 ];
 
