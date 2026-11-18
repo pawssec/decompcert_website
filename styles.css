@@ -139,6 +139,8 @@ h1 span { color: var(--mint); }
 .section-heading { display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem 6rem; align-items: end; margin-bottom: 3rem; }
 .section-heading .eyebrow { grid-column: 1 / -1; margin-bottom: -.7rem; }
 .section-heading h2 { margin-bottom: 0; font-size: clamp(2.4rem, 4.7vw, 4.6rem); line-height: 1.02; letter-spacing: -.055em; }
+.section-heading .wide-heading { grid-column: 1 / -1; font-size: clamp(1.35rem, 5.5vw, 5.7rem); }
+.heading-line { display: block; white-space: nowrap; }
 .section-heading > p:last-child { margin: 0; color: var(--muted-dark); font-size: 1rem; line-height: 1.75; }
 .principle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .principle-card { position: relative; min-height: 350px; padding: 2rem; border: 1px solid var(--line-dark); border-radius: var(--radius); background: rgba(255,255,255,.53); overflow: hidden; transition: transform .25s, border-color .25s, box-shadow .25s; }
@@ -247,7 +249,7 @@ h1 span { color: var(--mint); }
 
 .availability { padding-block: 115px; color: var(--ink); background: #10211c; }
 .availability-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 7vw; align-items: center; }
-.availability h2 { margin: .8rem 0 1.2rem; font-size: clamp(2.7rem, 5vw, 5rem); line-height: .98; letter-spacing: -.06em; }
+.availability h2 { margin: .8rem 0 1.2rem; font-size: clamp(1.35rem, 3.5vw, 4rem); line-height: .98; letter-spacing: -.06em; }
 .availability p { max-width: 650px; color: #91a79f; line-height: 1.75; }
 .release-card { padding: 2rem; border: 1px solid var(--line); border-radius: 22px; background: #142923; }
 .release-tag { display: inline-flex; padding: .35rem .5rem; border-radius: 999px; color: #a3c8bc; background: rgba(84,240,186,.08); font-size: .58rem; font-weight: 850; letter-spacing: .11em; }
@@ -304,7 +306,8 @@ footer p { margin: 0; }
   .problem, .assurance, .explorer { padding-block: 80px; }
   .architecture, .results, .availability { padding-block: 80px; }
   .section-heading { margin-bottom: 2rem; }
-  .section-heading h2, .availability h2 { font-size: 2.65rem; }
+  .section-heading h2 { font-size: 2.65rem; }
+  .availability h2 { font-size: clamp(1.35rem, 5.5vw, 2.65rem); }
   .assurance-card { grid-template-columns: 60px 1fr; padding: 1.25rem; }
   .assurance-number { font-size: 2.5rem; }
   .theorem-card { padding: 1.4rem; }
@@ -900,7 +903,7 @@ footer {
 }
 .footer-brand { justify-content: center; color: #f2f5fa; }
 .footer-brand .brand-cert { color: #1f6f3d; }
-.footer-statement { max-width: 850px; color: #eef3f8; font-family: var(--display); font-size: clamp(.95rem, 1.6vw, 1.25rem); line-height: 1.5; }
+.footer-statement { width: min(1100px, calc(100% - 48px)); color: #eef3f8; font-family: var(--display); font-size: clamp(.95rem, 1.6vw, 1.25rem); line-height: 1.5; }
 .footer-status { max-width: 1050px; color: #7f8da2; font-size: .7rem; font-weight: 650; letter-spacing: .035em; line-height: 1.6; }
 .footer-statement, .footer-status { margin-inline: auto; }
 
