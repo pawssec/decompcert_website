@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="icon" href="assets/logo-paw-certified.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261117-12">
+    <link rel="stylesheet" href="styles.css?v=20261117-16">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
             reconstructs high-level C programs from assembly. It combines
             automated program reconstruction, machine-checked proofs, and
             translation validation to establish semantic guarantees for
-            accepted reconstructions.
+            accepted&nbsp;reconstructions.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#explorer">Try the interactive example <span>→</span></a>
@@ -208,14 +208,14 @@
               <div>
                 <p class="mini-label">DIRECTLY VERIFIED PASSES</p>
                 <h3>Reconstruction and proof live together in Rocq.</h3>
-                <p>A state relation connects the higher- and lower-level executions. Initial states, execution steps, and final states are proved to correspond.</p>
+                <p>A state relation connects the two executions across initial states, individual steps, and final outcomes.</p>
               </div>
             </article>
             <article class="assurance-card validated-card reveal">
               <div class="assurance-number">6</div>
               <div>
                 <p class="mini-label">TRANSLATION-VALIDATED PASSES</p>
-                <h3>Untrusted generators. Proved acceptance checks.</h3>
+                <h3>Untrusted search, proved checks.</h3>
                 <p>A generator may search aggressively. A proved validator accepts only candidates connected to the lower-level input by the required semantic result.</p>
               </div>
             </article>
@@ -272,7 +272,7 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Pipeline explorer</p>
           <h2 class="wide-heading"><span class="heading-line">See information return,</span><span class="heading-line">one representation at a time.</span></h2>
-          <p>Explore cleaned excerpts from an actual end-to-end reconstruction of <code>add_call.c</code>, generated and accepted by the DeCompCert pipeline.</p>
+          <p>Explore cleaned excerpts from an accepted end-to-end reconstruction of <code>add_call.c</code>. Every stage comes from the same DeCompCert run.</p>
         </div>
 
         <div class="explorer-shell reveal">
@@ -382,6 +382,6 @@
       <p class="footer-status">Research Preview · CompCert-generated AArch64 Supported · Clang, x86, and RISC-V In Progress · Source Release Planned</p>
     </footer>
 
-    <script type="module" src="app.js?v=20261117-5"></script>
+    <script type="module" src="app.js?v=20261117-6"></script>
   </body>
 </html>

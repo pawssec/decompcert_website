@@ -33,6 +33,8 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
+p { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
 body::selection { color: var(--night); background: var(--mint); }
 a { color: inherit; }
 button, input { font: inherit; }
@@ -172,7 +174,7 @@ h1 span { color: var(--mint); }
 .stage-detail { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 2rem; margin-top: 8px; padding: 2rem; border-radius: 16px; color: #c8d8d3; background: #101f1b; }
 .stage-detail small { color: #5f786f; font-size: .61rem; font-weight: 850; letter-spacing: .15em; }
 .stage-detail h3 { margin: .55rem 0 0; font-size: 1.35rem; }
-.stage-detail p { margin: .55rem 0 0; color: #8ea49c; font-size: .82rem; line-height: 1.65; }
+.stage-detail p { margin: .55rem 0 0; color: #8ea49c; font-size: .82rem; line-height: 1.65; text-wrap: balance; }
 .stage-detail .assurance-pill { display: inline-flex; align-items: center; gap: .45rem; width: fit-content; padding: .45rem .6rem; border: 1px solid rgba(84,240,186,.28); border-radius: 999px; color: var(--mint); font-size: .67rem; font-weight: 800; }
 .stage-detail .assurance-pill.validated { color: #98abff; border-color: rgba(107,140,255,.35); }
 
@@ -186,6 +188,7 @@ h1 span { color: var(--mint); }
 .mini-label { margin-bottom: .45rem; color: #7a8f88; font-size: .61rem; font-weight: 850; letter-spacing: .13em; }
 .assurance-card h3 { margin-bottom: .55rem; font-size: 1.05rem; }
 .assurance-card p:last-child { margin-bottom: 0; color: var(--muted-dark); font-size: .85rem; line-height: 1.62; }
+.assurance-card h3, .assurance-card p { text-wrap: balance; }
 .theorem-card { padding: 2.1rem; border-radius: 24px; color: var(--ink); background: linear-gradient(145deg, #0d1d18, #102a22); box-shadow: 0 28px 70px rgba(21,54,44,.17); }
 .theorem-header { display: flex; align-items: center; gap: 1rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
 .theorem-header div { display: flex; flex-direction: column; gap: .2rem; }
@@ -408,7 +411,9 @@ h1 span {
   background: linear-gradient(90deg, #b8ff65 5%, #d7ffad 42%, #76d6ff 100%);
   -webkit-background-clip: text; background-clip: text;
 }
-.hero-lede { max-width: 720px; margin-inline: auto; color: #9ba7a2; font-size: clamp(1rem, 1.8vw, 1.35rem); line-height: 1.6; }
+.hero-lede { max-width: 800px; margin-inline: auto; color: #9ba7a2; font-size: clamp(1rem, 1.8vw, 1.35rem); line-height: 1.6; }
+.hero h1 { font-size: clamp(3rem, 6.4vw, 6.4rem); line-height: .92; }
+.hero-title-second { display: block; white-space: nowrap; }
 .hero-actions { justify-content: center; }
 .hero-proof-line { justify-content: center; }
 .button { min-height: 56px; padding-inline: 1.35rem; border-radius: 999px; }
@@ -954,4 +959,13 @@ footer {
   .team-grid { grid-template-columns: 1fr; }
   .person-lead { grid-column: auto; }
   .person-card { min-height: 285px; }
+}
+
+@media (max-width: 720px) {
+  .hero h1 { font-size: 4.25vw; }
+  .site-header { width: 100%; min-width: 0; overflow: hidden; }
+  .desktop-nav { width: 100%; min-width: 0; max-width: 100%; }
+  .assurance-layout { grid-template-columns: minmax(0, 1fr); }
+  .theorem-card { min-width: 0; }
+  .formula { overflow-x: auto; }
 }

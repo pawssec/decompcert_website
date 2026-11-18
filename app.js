@@ -1,5 +1,5 @@
 const architectureStages = [
-  { from: "Asm", to: "Mach", kind: "validated", recovery: "Instruction expansion", evidence: "Asmgen validator", description: "Recognizes the Mach instruction represented by each expanded assembly sequence and checks the complete regenerated Asm program." },
+  { from: "Asm", to: "Mach", kind: "validated", recovery: "Instruction expansion", evidence: "Asmgen validator", description: "Recovers the Mach instruction encoded by each expanded assembly sequence, then validates the regenerated Asm program." },
   { from: "Mach", to: "Linear", kind: "validated", recovery: "Stack abstractions", evidence: "Stacking validator", description: "Recovers abstract stack slots, frame size, and callee-save structure from concrete Mach stack offsets." },
   { from: "Linear", to: "LTL", kind: "verified", recovery: "Control-flow graph", evidence: "Rocq simulation theorem", description: "Turns labels, branches, and linear fall-through into an explicit graph with proved state correspondence." },
   { from: "LTL", to: "RTL", kind: "validated", recovery: "Pseudo-registers", evidence: "Allocation validator", description: "Reconstructs virtual registers from machine locations while preserving moves, live ranges, calls, and split values." },
