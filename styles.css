@@ -58,6 +58,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .brand { display: inline-flex; align-items: center; gap: .7rem; width: fit-content; text-decoration: none; font-size: 1.05rem; font-weight: 850; letter-spacing: -.02em; }
 .brand img { filter: drop-shadow(0 0 16px rgba(84, 240, 186, .2)); }
+.brand-cert { color: #1f6f3d; }
 .desktop-nav { display: flex; gap: 2rem; }
 .desktop-nav a { color: #bdd0ca; text-decoration: none; font-size: .88rem; font-weight: 650; transition: color .2s; }
 .desktop-nav a:hover { color: var(--mint); }
@@ -898,6 +899,7 @@ footer {
   text-align: center;
 }
 .footer-brand { justify-content: center; color: #f2f5fa; }
+.footer-brand .brand-cert { color: #1f6f3d; }
 .footer-statement { max-width: 850px; color: #eef3f8; font-family: var(--display); font-size: clamp(.95rem, 1.6vw, 1.25rem); line-height: 1.5; }
 .footer-status { max-width: 1050px; color: #7f8da2; font-size: .7rem; font-weight: 650; letter-spacing: .035em; line-height: 1.6; }
 .footer-statement, .footer-status { margin-inline: auto; }
