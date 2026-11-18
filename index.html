@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DeCompCert is a Rocq-verified decompiler for CompCert-generated AArch64 assembly.">
+    <meta name="theme-color" content="#f7f4ec">
+    <title>DeCompCert — Formal verification for reverse engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=20261117-3">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="DeCompCert home">
+        <img src="assets/mark.svg" alt="" width="36" height="36">
+        <span>DeCompCert</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#architecture">Architecture</a>
+        <a href="#assurance">Assurance</a>
+        <a href="#results">Results</a>
+        <a href="#explorer">Explorer</a>
+        <a href="#team">Team</a>
+        <a href="https://arxiv.org/abs/2611.18055" target="_blank" rel="noreferrer">Paper ↗</a>
+      </nav>
+      <a class="header-cta" href="#availability">Release status <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="main">
+      <section class="hero section-shell" id="top">
+        <div class="hero-copy reveal">
+          <div class="kicker"><span class="pulse"></span> Rocq-verified</div>
+          <h1>Beyond Heuristics. <span class="hero-title-second">Toward Verified Decompilation.</span></h1>
+          <p class="hero-thesis">Bringing Formal Verification to Reverse Engineering.</p>
+          <p class="hero-lede">
+            DeCompCert is a formally verified decompilation framework that
+            reconstructs high-level C programs from assembly. It combines
+            automated program reconstruction, machine-checked proofs, and
+            translation validation to establish semantic guarantees for
+            accepted reconstructions.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#explorer">Try the interactive example <span>→</span></a>
+            <a class="button button-quiet" href="https://arxiv.org/abs/2611.18055" target="_blank" rel="noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-proof-line">
+            <span class="proof-seal" aria-hidden="true">✓</span>
+            <p><strong>Accepted output only.</strong> A failed search emits no certified C result.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Illustration of verified decompilation from assembly to C">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="code-window glass-card">
+            <div class="window-bar">
+              <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>verified reconstruction</span>
+              <span class="window-status"><i></i> accepted</span>
+            </div>
+            <div class="code-transform">
+              <div class="code-pane">
+                <span class="code-label">AARCH64 ASM · ACTUAL BUNDLE</span>
+                <pre aria-label="AArch64 assembly example"><code><span class="dim">_add:</span>
+  mov  x15, sp
+  stp  x15, x30, [sp, #-16]!
+  add  w0, w0, w1
+  ldr  x30, [sp, #8]
+  add  sp, sp, #16
+  ret  x30</code></pre>
+              </div>
+              <div class="transform-spine" aria-hidden="true">
+                <span class="spine-dot"></span>
+                <span class="spine-line"></span>
+                <span class="spine-badge">9 stages</span>
+                <span class="spine-line"></span>
+                <span class="spine-dot"></span>
+              </div>
+              <div class="code-pane high-level">
+                <span class="code-label">RECONSTRUCTED C · ACTUAL BUNDLE</span>
+                <pre aria-label="Reconstructed C example"><code><span class="kw">int</span> add(<span class="kw">int</span> x, <span class="kw">int</span> y) {
+  <span class="kw">int</span> z;
+  z = x + y;
+  <span class="kw">return</span> z;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="floating-chip chip-proof"><b>Rocq</b><span>semantic proof</span></div>
+          <div class="floating-chip chip-check"><b>✓</b><span>validator accepted</span></div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Project summary">
+        <div><span>Input</span><strong>Typed CompCert Asm</strong></div>
+        <i aria-hidden="true"></i>
+        <div><span>Method</span><strong>Verified + validated</strong></div>
+        <i aria-hidden="true"></i>
+        <div><span>Output</span><strong>CompCert Csyntax</strong></div>
+        <i aria-hidden="true"></i>
+        <div><span>Target</span><strong>AArch64</strong></div>
+      </section>
+
+      <section class="problem section-shell" id="why">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Why DeCompCert</p>
+          <h2>Decompilation is inference.<br>Correctness should not be.</h2>
+          <p>Compilation erases names, types, stack abstractions, register boundaries, and structured control flow. Conventional decompilers use powerful heuristics to recover plausible source. DeCompCert keeps that flexibility, then checks the result.</p>
+        </div>
+        <div class="principle-grid">
+          <article class="principle-card reveal">
+            <span class="card-index">01</span>
+            <div class="icon-frame" aria-hidden="true">⌁</div>
+            <h3>Search without trust</h3>
+            <p>OCaml and Datalog analyses reconstruct candidates and rank ambiguous signatures. Their answers are proposals—not proof assumptions.</p>
+          </article>
+          <article class="principle-card reveal">
+            <span class="card-index">02</span>
+            <div class="icon-frame" aria-hidden="true">◇</div>
+            <h3>Check every boundary</h3>
+            <p>Directly verified passes carry semantic simulations. Other stages use proved validators to accept or reject each candidate.</p>
+          </article>
+          <article class="principle-card reveal">
+            <span class="card-index">03</span>
+            <div class="icon-frame" aria-hidden="true">∴</div>
+            <h3>Compose the proof</h3>
+            <p>Nine local results connect into a whole-decompiler theorem from reconstructed C back to the supplied typed assembly.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="architecture" id="architecture">
+        <div class="section-shell">
+          <div class="section-heading light reveal">
+            <p class="eyebrow">The reverse pipeline</p>
+            <h2>Nine stages. One connected guarantee.</h2>
+            <p>Each stage reverses one information-losing CompCert transformation. Select a stage to see what it reconstructs and how it is certified.</p>
+          </div>
+          <div class="support-matrix reveal" aria-label="Architecture and assembly input support">
+            <div class="support-group">
+              <div class="support-group-title">
+                <span>Target ISA</span>
+                <small>Machine architecture</small>
+              </div>
+              <div class="target-card target-supported">
+                <span class="target-mark" aria-hidden="true">A64</span>
+                <div><strong>AArch64</strong><small><i></i> Supported</small></div>
+              </div>
+              <div class="target-card target-planned">
+                <span class="target-mark" aria-hidden="true">x86</span>
+                <div><strong>x86</strong><small>In progress</small></div>
+              </div>
+              <div class="target-card target-planned">
+                <span class="target-mark" aria-hidden="true">RV</span>
+                <div><strong>RISC-V</strong><small>In progress</small></div>
+              </div>
+            </div>
+            <div class="support-group assembly-support">
+              <div class="support-group-title">
+                <span>Assembly input</span>
+                <small>Supported compiler output</small>
+              </div>
+              <div class="target-card target-supported">
+                <span class="target-mark target-wordmark" aria-hidden="true">CC</span>
+                <div><strong>CompCert assembly</strong><small><i></i> Supported</small></div>
+              </div>
+              <div class="target-card target-progress">
+                <span class="target-mark target-wordmark" aria-hidden="true">Cl</span>
+                <div><strong>Clang assembly</strong><small><i></i> In progress</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="pipeline-wrap reveal">
+            <div class="pipeline-key" aria-label="Assurance legend">
+              <span><i class="legend-dot verified"></i> Directly verified</span>
+              <span><i class="legend-dot validated"></i> Translation validated</span>
+            </div>
+            <div class="pipeline" id="architecture-pipeline" role="list"></div>
+            <article class="stage-detail" id="stage-detail" aria-live="polite"></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="assurance section-shell" id="assurance">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Formal assurance</p>
+          <h2>Two proof styles.<br>A single semantic story.</h2>
+        </div>
+        <div class="assurance-layout">
+          <div class="assurance-cards">
+            <article class="assurance-card verified-card reveal">
+              <div class="assurance-number">3</div>
+              <div>
+                <p class="mini-label">DIRECTLY VERIFIED PASSES</p>
+                <h3>Reconstruction and proof live together in Rocq.</h3>
+                <p>A state relation connects the higher- and lower-level executions. Initial states, execution steps, and final states are proved to correspond.</p>
+              </div>
+            </article>
+            <article class="assurance-card validated-card reveal">
+              <div class="assurance-number">6</div>
+              <div>
+                <p class="mini-label">TRANSLATION-VALIDATED PASSES</p>
+                <h3>Untrusted generators. Proved acceptance checks.</h3>
+                <p>A generator may search aggressively. A proved validator accepts only candidates connected to the lower-level input by the required semantic result.</p>
+              </div>
+            </article>
+          </div>
+          <div class="theorem-card reveal">
+            <div class="theorem-header">
+              <span class="proof-seal">✓</span>
+              <div><small>COMPOSED THEOREM</small><strong>Accepted C → supplied Asm</strong></div>
+            </div>
+            <div class="guarantee-stack">
+              <div class="formula guarantee-row">
+                <span class="guarantee-label">Every accepted result</span>
+                <span>Decompile(P<sub>Asm</sub>) = OK(P<sub>C</sub>)</span>
+                <b>⇒</b>
+                <span>Behaviors(P<sub>C</sub>) ⊑ Behaviors(P<sub>Asm</sub>)</span>
+              </div>
+              <div class="formula guarantee-row equivalence-row">
+                <span class="guarantee-label">When reconstructed C is safe</span>
+                <span>Decompile(P<sub>Asm</sub>) = OK(P<sub>C</sub>) ∧ Safe(P<sub>C</sub>)</span>
+                <b>⇒</b>
+                <span>Behaviors(P<sub>C</sub>) = Behaviors(P<sub>Asm</sub>)</span>
+              </div>
+            </div>
+            <p>The first result is unconditional for every accepted reconstruction. The second rules out undefined C executions and strengthens the result to equality of observable behaviors.</p>
+            <details>
+              <summary>What is inside the trusted boundary?</summary>
+              <p>The theorem begins at typed, unexpanded CompCert Asm. Parsing assembly text, reversing concrete instruction expansion, and constructing that typed representation precede the theorem. Experimental Clang normalization is likewise outside the current mechanized guarantee.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="results" id="results">
+        <div class="section-shell">
+          <div class="section-heading light reveal">
+            <p class="eyebrow">Evaluation</p>
+            <h2>Application-scale, proof-backed coverage.</h2>
+            <p>Coverage counts a reconstruction only when the complete connected chain is accepted. Producing an unchecked candidate does not count.</p>
+          </div>
+          <div class="stats-grid">
+            <article class="stat reveal"><strong>2.16M</strong><span>lines of C in the evaluation corpus</span></article>
+            <article class="stat reveal"><strong>100%</strong><span>3,173 / 3,173 eligible contexts accepted with exact function and call signatures</span></article>
+            <article class="stat reveal"><strong>82.4%</strong><span>signature-free cumulative portfolio coverage</span></article>
+            <article class="stat reveal"><strong>45,660</strong><span>matched function instances in source-quality analysis</span></article>
+          </div>
+          <div class="result-note reveal">
+            <span>Measured at both unoptimized and optimized CompCert pipelines</span>
+            <span>Failed searches emit no certified C</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="explorer section-shell" id="explorer">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Pipeline explorer</p>
+          <h2>See information return,<br>one representation at a time.</h2>
+          <p>Explore an actual end-to-end reconstruction of <code>add_call.c</code>, generated and accepted by the DeCompCert pipeline.</p>
+        </div>
+
+        <div class="explorer-shell reveal">
+          <div class="explorer-toolbar">
+            <div class="explorer-source">
+              <span class="live-dot"></span>
+              <div><small id="bundle-label">SAMPLE</small><strong id="bundle-target">AArch64 · Apple ABI</strong></div>
+            </div>
+            <div class="toolbar-actions" hidden>
+              <label class="bundle-button" for="bundle-input">
+                <input id="bundle-input" type="file" webkitdirectory multiple>
+                Open local bundle
+              </label>
+              <button class="icon-button" id="reset-sample" type="button" hidden>Restore verified example</button>
+            </div>
+          </div>
+          <div class="bundle-help" hidden>
+            <span>Local workflow</span>
+            <code>./ccomp -O0 -decompcert-bundle program.c</code>
+            <p>Select the generated <code>program.decompcert/</code> folder. Files are read only in this browser and are not uploaded.</p>
+          </div>
+          <div class="bundle-message" id="bundle-message" hidden></div>
+          <div class="stage-tabs" id="explorer-tabs" role="tablist" aria-label="DeCompCert stages"></div>
+          <div class="comparison-grid">
+            <article class="comparison-pane previous-pane">
+              <header><div><small>PREVIOUS REPRESENTATION</small><strong id="previous-title"></strong></div><span id="previous-badge"></span></header>
+              <pre><code id="previous-code"></code></pre>
+            </article>
+            <article class="comparison-pane current-pane">
+              <header><div><small>SELECTED REPRESENTATION</small><strong id="current-title"></strong></div><div class="pane-actions"><span id="current-badge"></span><button id="copy-code" type="button">Copy</button></div></header>
+              <pre><code id="current-code"></code></pre>
+            </article>
+          </div>
+          <div class="evidence-bar"><span>Evidence</span><strong id="stage-evidence"></strong></div>
+        </div>
+      </section>
+
+      <section class="team" id="team">
+        <div class="section-shell">
+          <div class="team-intro reveal">
+            <div>
+              <p class="eyebrow">Project vision &amp; team</p>
+              <h2>Make recovered programs<br>worthy of trust.</h2>
+            </div>
+            <p>
+              DeCompCert brings formal verification to decompilation without
+              giving up practical reconstruction and search. The project is led
+              by researchers working across formal methods, compilers, program
+              analysis, and systems security.
+            </p>
+          </div>
+
+          <div class="team-grid">
+            <a class="person-card person-lead reveal" href="https://swarnpriya.github.io/" target="_blank" rel="noreferrer">
+              <span class="person-role">Lead / Maintainer</span>
+              <span class="person-monogram" aria-hidden="true">SP</span>
+              <span class="person-name">Swarn Priya</span>
+              <span class="person-link">Personal website <b aria-hidden="true">↗</b></span>
+            </a>
+            <a class="person-card reveal" href="https://basavesh.github.io/" target="_blank" rel="noreferrer">
+              <span class="person-role">Collaborator</span>
+              <span class="person-monogram" aria-hidden="true">BS</span>
+              <span class="person-name">Basavesh Ammanaghatta Shivakumar</span>
+              <span class="person-link">Personal website <b aria-hidden="true">↗</b></span>
+            </a>
+            <a class="person-card reveal" href="https://thomas.gilray.org/" target="_blank" rel="noreferrer">
+              <span class="person-role">Collaborator</span>
+              <span class="person-monogram" aria-hidden="true">TG</span>
+              <span class="person-name">Thomas Gilray</span>
+              <span class="person-link">Personal website <b aria-hidden="true">↗</b></span>
+            </a>
+            <a class="person-card reveal" href="https://kmicinski.com/" target="_blank" rel="noreferrer">
+              <span class="person-role">Collaborator</span>
+              <span class="person-monogram" aria-hidden="true">KM</span>
+              <span class="person-name">Kristopher Micinski</span>
+              <span class="person-link">Personal website <b aria-hidden="true">↗</b></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="availability" id="availability">
+        <div class="section-shell availability-inner reveal">
+          <div>
+            <p class="eyebrow">Availability</p>
+            <h2>Research prototype today.<br>Open-source release ahead.</h2>
+            <p>The implementation is currently private while the research artifact is prepared. This website exposes the architecture, guarantee, results, and a local bundle viewer without publishing the compiler source.</p>
+          </div>
+          <div class="release-card">
+            <span class="release-tag">CURRENT STATUS</span>
+            <h3>Private development</h3>
+            <ul>
+              <li><span>✓</span> End-to-end Rocq theorem</li>
+              <li><span>✓</span> Application-scale evaluation</li>
+              <li><span>✓</span> Static pipeline explorer</li>
+              <li class="pending"><span>○</span> Public source and artifact release</li>
+            </ul>
+            <p>GitHub source and reproducibility instructions will appear here when the public release is ready.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand"><img src="assets/mark.svg" alt="" width="36" height="36"><strong>DeCompCert</strong></div>
+      <p class="footer-statement"><strong>A formally verified decompilation framework for reconstructing C programs from assembly.</strong></p>
+      <p class="footer-status">Research Preview · CompCert-generated AArch64 Supported · Clang, x86, and RISC-V In Progress · Source Release Planned</p>
+    </footer>
+
+    <script type="module" src="app.js?v=20261117-3"></script>
+  </body>
+</html>
