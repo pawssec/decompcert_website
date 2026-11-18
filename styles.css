@@ -647,7 +647,6 @@ body {
 .paper-entry strong { font-family: var(--display); font-size: 1rem; line-height: 1.35; letter-spacing: -.02em; }
 .paper-entry small { display: flex; justify-content: space-between; gap: 1rem; width: 100%; color: #718096; font-size: .65rem; }
 .paper-entry small b { color: #6544c6; }
-.section-heading .wide-heading { grid-column: 1 / -1; white-space: nowrap; }
 .header-cta {
   color: #fff;
   border: 0;
@@ -938,7 +937,6 @@ footer {
   .paper-menu { flex: 0 0 auto; }
   .paper-menu summary { padding: .48rem .68rem; font-size: .65rem; }
   .paper-popover { position: fixed; top: 104px; right: 14px; left: 14px; width: auto; }
-  .section-heading .wide-heading { white-space: normal; }
   .site-header.scrolled .desktop-nav { background: rgba(248,245,239,.92); }
   .bundle-help { grid-template-columns: 1fr; }
   .bundle-help code { overflow-x: auto; }
